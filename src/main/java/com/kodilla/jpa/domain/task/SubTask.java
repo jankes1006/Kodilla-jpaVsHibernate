@@ -1,7 +1,6 @@
 package com.kodilla.jpa.domain.task;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity

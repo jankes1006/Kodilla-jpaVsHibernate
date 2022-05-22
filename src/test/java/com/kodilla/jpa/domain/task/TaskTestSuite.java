@@ -1,21 +1,12 @@
 package com.kodilla.jpa.domain.task;
 
-import com.kodilla.jpa.domain.invoice.Customer;
-import com.kodilla.jpa.domain.invoice.Invoice;
-import com.kodilla.jpa.domain.invoice.Item;
-import com.kodilla.jpa.domain.invoice.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.Assert;
 
 import javax.persistence.*;
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class TaskTestSuite {
@@ -43,21 +34,21 @@ class TaskTestSuite {
         p2.setSubTasks(List.of(s2));
         s3.setPerformersOfSubTasks(Set.of(p3, p4));
         s4.setPerformersOfSubTasks(Set.of(p3, p4));
-        p3.setSubTasks(List.of(s3,s4));
-        p4.setSubTasks(List.of(s3,s4));
-        t1.setSubTasks(List.of(s1,s2));
+        p3.setSubTasks(List.of(s3, s4));
+        p4.setSubTasks(List.of(s3, s4));
+        t1.setSubTasks(List.of(s1, s2));
         s1.setTask(t1);
         s2.setTask(t1);
-        t2.setSubTasks(List.of(s3,s4));
+        t2.setSubTasks(List.of(s3, s4));
         s3.setTask(t2);
         s4.setTask(t2);
-        t1.setPerformersOfTasks(Set.of(p1,p2));
+        t1.setPerformersOfTasks(Set.of(p1, p2));
         p1.setTasks(List.of(t1));
         p2.setTasks(List.of(t1));
-        t2.setPerformersOfTasks(Set.of(p3,p4));
+        t2.setPerformersOfTasks(Set.of(p3, p4));
         p3.setTasks(List.of(t2));
         t3.setPerformersOfTasks(Set.of(p4));
-        p4.setTasks(List.of(t2,t3));
+        p4.setTasks(List.of(t2, t3));
 
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -104,15 +95,15 @@ class TaskTestSuite {
             System.out.println(task);
 
             System.out.println("*** STEP 3 – read the task performers task ***");
-            for(Person person: task.getPerformersOfTasks()){
+            for (Person person : task.getPerformersOfTasks()) {
                 System.out.println(person);
             }
 
-            for(SubTask subTask: task.getSubTasks()){
+            for (SubTask subTask : task.getSubTasks()) {
                 System.out.println("*** STEP 4 – read the basic data about subtask ***");
                 System.out.println(subTask);
                 System.out.println("*** STEP 5 – read the performers subtask ***");
-                for(Person person: subTask.getPerformersOfSubTasks()){
+                for (Person person : subTask.getPerformersOfSubTasks()) {
                     System.out.println(person);
                 }
             }
